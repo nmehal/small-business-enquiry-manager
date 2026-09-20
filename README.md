@@ -2,6 +2,11 @@
 
 > **This is a fictional portfolio/demo project.** Not built for any real client. Uses fictional Australian sample data. No real customer data, logos, secrets, or paid APIs.
 
+## Demo
+
+![Small Business Enquiry Manager dashboard](docs/screenshots/enquiry-manager-dashboard.png)
+
+
 ## Problem
 Small service businesses lose leads because enquiries are unqualified, untracked, and scattered across email. A lightweight qualification and tracking system improves response speed and conversion visibility.
 
