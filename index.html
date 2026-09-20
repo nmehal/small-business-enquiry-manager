@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Small Business Enquiry Manager — Portfolio Demo</title>
+<style>
+:root{--primary:#1a3a52;--accent:#c9a227;--bg:#f5f7fa;--card:#fff;--high:#c0392b;--med:#d48c00;--low:#27ae60;--text:#23303e}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{background:var(--bg);color:var(--text);line-height:1.45}
+header{background:linear-gradient(135deg,#1a3a52 60%,#2a4d6e);color:#fff;padding:2.4rem 1.2rem;text-align:center}
+header h1{font-size:2rem;letter-spacing:0.5px}
+header .tagline{opacity:.85;margin-top:.35rem;font-size:.95rem}
+.container{max-width:1480px;margin:0 auto;padding:1.5rem 1.2rem}
+.note{background:#fff5e6;border-left:4px solid var(--accent);padding:.8rem 1rem;border-radius:6px;margin-bottom:1.2rem;font-size:.9rem;color:#634}
+.card{background:var(--card);border-radius:12px;padding:1.5rem;box-shadow:0 4px 16px rgba(26,58,82,.06)}
+.card h2{font-size:1.15rem;color:var(--primary);margin-bottom:1rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem;display:inline-block}
+.grid{display:grid;gap:1.4rem;min-width:0}
+.grid-2{grid-template-columns:38% 62%}
+label{display:block;font-size:.8rem;font-weight:600;color:#556;margin-bottom:.25rem}
+input,select,textarea{width:100%;padding:.55rem .7rem;border:1px solid #ccd6e0;border-radius:8px;background:#fff;font-size:.95rem}
+textarea{resize:vertical;min-height:90px}
+.row-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.7rem}
+button{background:var(--primary);color:#fff;border:none;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s}
+button:hover{background:#15304a}
+.priority-badge{display:inline-block;padding:.15rem .6rem;border-radius:20px;font-size:.78rem;font-weight:700;color:#fff}
+.priority-high{background:var(--high)}.priority-medium{background:var(--med)}.priority-low{background:var(--low)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{background:var(--primary);color:#fff;text-align:left;padding:.6rem .7rem;font-size:.8rem}
+td{padding:.6rem .7rem;border-bottom:1px solid #e2e8f0;background:#fff}
+.status{font-size:.78rem;padding:.15rem .5rem;border-radius:12px;font-weight:600;color:#fff;background:#6a7a8a}
+.status.qualified{background:#27ae60}.status.new{background:#e67e22}.status.contacted{background:#2980b9}.status.won{background:#2ecc71}.status.lost{background:#c0392b}
+.filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.filter-bar input,.filter-bar select{flex:1 1 180px}
+.reasons{font-size:.85rem;color:#556;margin-top:.3rem}
+@media(max-width:900px){.grid-2{grid-template-columns:1fr}.card{align-self:start}}
+@media(max-width:600px){header h1{font-size:1.5rem}.container{padding:1rem .7rem}}
+</style>
+</head>
+<body>
+<header><h1>Small Business Enquiry Manager</h1><div class="tagline">Portfolio demo · Fictional data · No real clients</div></header>
+<div class="container">
+<div class="note"><strong>Fictional portfolio/demo.</strong> Not built for any real client. Uses fictional Australian sample data; no real customer information, logos, or secrets.</div>
+<div class="grid grid-2">
+<div class="card"><h2>New Enquiry</h2>
+<form id="enquiryForm" onsubmit="submitEnquiry(event)">
+<label for="name">Name</label><input id="name" required placeholder="Jane Smith">
+<label for="email">Email</label><input type="email" id="email" required placeholder="jane@example.com">
+<div class="row-2"><div><label for="phone">Phone</label><input type="tel" id="phone" placeholder="0412 345 678"></div><div><label for="suburb">Suburb / Location</label><input id="suburb" placeholder="Brunswick"></div></div>
+<label for="service">Service / Project Type</label>
+<select id="service"><option>Renovation</option><option>Extension</option><option>New Build</option><option>Consultation</option></select>
+<div class="row-2">
+<div><label for="budget">Budget (AUD)</label><select id="budget"><option>Under $20k</option><option>$20k–$50k</option><option>$50k–$150k</option><option>$150k+</option></select></div>
+<div><label for="timeline">Timeline / Readiness</label><select id="timeline"><option>Ready now</option><option>Within 1 month</option><option>Within 3 months</option><option>Just exploring</option></select></div>
+</div>
+<label for="notes">Notes</label><textarea id="notes" placeholder="Describe the project briefly..."></textarea>
+<button type="submit" style="margin-top:.8rem">Submit Enquiry → Score Lead</button>
+</form></div>
+<div class="card"><h2>Dashboard</h2>
+<div class="filter-bar">
+<select id="fStatus" onchange="renderDashboard()"><option>All Statuses</option><option>New</option><option>Contacted</option><option>Qualified</option><option>Won</option><option>Lost</option></select>
+<input id="fSearch" placeholder="Search name, suburb, service..." oninput="renderDashboard()">
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th>Name</th><th>Suburb</th><th>Service</th><th>Budget</th><th>Priority</th><th>Status</th><th>Next Action</th></tr></thead>
+<tbody id="dashboardBody"></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<script>
+const sampleData=[
+{"name":"Sarah Whitmore","email":"sarah.w@example.com","phone":"0411 223 344","suburb":"Fitzroy","service":"Renovation","budget":"$50k–$150k","timeline":"Ready now","notes":"Kitchen + bathroom overhaul, heritage overlay.","status":"Qualified","priority":"high","reasons":["Ready now","High budget","Specific scope"]},
+{"name":"David Chen","email":"david.c@example.com","phone":"0433 998 112","suburb":"Coburg","service":"Extension","budget":"$20k–$50k","timeline":"Within 1 month","notes":"Single-storey rear extension for growing family.","status":"Contacted","priority":"medium","reasons":["Within 1 month","Medium budget","Clear scope"]},
+{"name":"Priya Nair","email":"priya.n@example.com","phone":"0400 771 229","suburb":"Sunshine","service":"Consultation","budget":"Under $20k","timeline":"Just exploring","notes":"Early-stage planning; wants cost estimates.","status":"New","priority":"low","reasons":["Just exploring","Low budget","No fixed timeline"]},
+{"name":"Tom Reynolds","email":"tom.r@example.com","phone":"0412 777 001","suburb":"St Kilda","service":"New Build","budget":"$150k+","timeline":"Ready now","notes":"Small-lot townhouse development. Developer referral.","status":"Won","priority":"high","reasons":["Ready now","High budget","Clear scope","Developer referral"]},
+{"name":"Emily Brooks","email":"emily.b@example.com","phone":"0415 612 345","suburb":"Richmond","service":"Renovation","budget":"Under $20k","timeline":"Within 3 months","notes":"Cosmetic refresh only; no structural work.","status":"Lost","priority":"low","reasons":["Low budget","Cosmetic only","Within 3 months (delayed)"]}
+];
+function scoreLead({service,budget,timeline,notes}){
+  const budgetScores={
+    'Under $20k':0,
+    '$20k–$50k':1,
+    '$50k–$150k':2,
+    '$150k+':3
+  };
+
+  const timelineScores={
+    'Just exploring':0,
+    'Within 3 months':1,
+    'Within 1 month':2,
+    'Ready now':3
+  };
+
+  const budgetReasons={
+    'Under $20k':'Low budget',
+    '$20k–$50k':'Lower budget',
+    '$50k–$150k':'Medium budget',
+    '$150k+':'High budget'
+  };
+
+  const timelineReasons={
+    'Just exploring':'Just exploring',
+    'Within 3 months':'Within 3 months',
+    'Within 1 month':'Within 1 month',
+    'Ready now':'Ready now'
+  };
+
+  const score=(budgetScores[budget] ?? 0)+(timelineScores[timeline] ?? 0);
+
+  const priority=score>=5?'high':score>=3?'medium':'low';
+
+  return{
+    priority,
+    reasons:[
+      timelineReasons[timeline] ?? 'Timeline not specified',
+      budgetReasons[budget] ?? 'Budget not specified'
+    ]
+  };
+}
+function submitEnquiry(e){e.preventDefault();
+  const name=document.getElementById('name').value.trim();
+  const service=document.getElementById('service').value;
+  const budget=document.getElementById('budget').value;
+  const timeline=document.getElementById('timeline').value;
+  const notes=document.getElementById('notes').value.trim();
+  const suburb=document.getElementById('suburb').value.trim();
+  const result=scoreLead({service,budget,timeline,notes});
+  sampleData.push({name,suburb,service,budget,status:'New',priority:result.priority,reasons:result.reasons,notes,email:'',phone:''});
+  renderDashboard();
+  document.getElementById('enquiryForm').reset();
+  alert('Lead scored: '+result.priority.toUpperCase()+'\nReasons: '+result.reasons.join(', '));
+}
+function nextAction(status){if(status==='New')return'Contact lead';if(status==='Contacted')return'Schedule follow-up';if(status==='Qualified')return'Send proposal / contract';if(status==='Won')return'Begin onboarding / project setup';if(status==='Lost')return'Archive or schedule future re-engagement';return'Review';}
+function renderDashboard(){
+  const fStatus=document.getElementById('fStatus').value;
+  const q=document.getElementById('fSearch').value.toLowerCase();
+  let rows=sampleData.filter(r=>{const ok=fStatus==='All Statuses'||r.status===fStatus;const match=!q||r.name.toLowerCase().includes(q)||r.suburb.toLowerCase().includes(q)||r.service.toLowerCase().includes(q);return ok&&match;});
+  const tbody=document.getElementById('dashboardBody');tbody.innerHTML='';
+  for(const r of rows){
+    const tr=document.createElement('tr');
+    const pClass=r.priority==='high'?'priority-high':r.priority==='medium'?'priority-medium':'priority-low';
+    tr.innerHTML=`<td><strong>${r.name}</strong></td><td>${r.suburb}</td><td>${r.service}</td><td>${r.budget}</td><td><span class="priority-badge ${pClass}">${r.priority}</span></td><td><span class="status ${r.status.toLowerCase().replace(' ','')}">${r.status}</span></td><td class="action-cell">${nextAction(r.status)}</td>`;
+    tr.style.cursor='pointer';
+    tr.onclick=()=>{
+      const existing=document.getElementById('detail-'+r.name);
+      if(existing){existing.remove();return;}
+      const detail=document.createElement('tr');
+      detail.id='detail-'+r.name;
+      detail.innerHTML='<td colspan="7" style="padding:.5rem .7rem;background:#f0f4f8;font-size:.88rem;color:#334;">Reasons: '+r.reasons.join(', ')+'</td>';
+      tr.parentNode.insertBefore(detail,tr.nextSibling);
+    };
+    tbody.appendChild(tr);
+  }
+}
+renderDashboard();
+</script>
+</body>
+</html>
