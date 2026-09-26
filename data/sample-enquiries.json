@@ -1,7 +1,7 @@
 [
-  {"name":"Sarah Whitmore","suburb":"Fitzroy","service":"Renovation","budget":"$50k–$150k","timeline":"Ready now","status":"Qualified","priority":"high","reasons":["Ready now","High budget","Specific scope"]},
-  {"name":"David Chen","suburb":"Coburg","service":"Extension","budget":"$20k–$50k","timeline":"Within 1 month","status":"Contacted","priority":"medium","reasons":["Within 1 month","Medium budget","Clear scope"]},
-  {"name":"Priya Nair","suburb":"Sunshine","service":"Consultation","budget":"Under $20k","timeline":"Just exploring","status":"New","priority":"low","reasons":["Just exploring","Lower budget","No fixed timeline"]},
-  {"name":"Tom Reynolds","suburb":"St Kilda","service":"New Build","budget":"$150k+","timeline":"Ready now","status":"Won","priority":"high","reasons":["Ready now","High budget","Clear scope"]},
-  {"name":"Emily Brooks","suburb":"Richmond","service":"Renovation","budget":"Under $20k","timeline":"Within 3 months","status":"Lost","priority":"low","reasons":["Low budget","Within 3 months (delayed)"]}
+  {"name":"Sarah Whitmore","suburb":"Fitzroy","service":"Renovation","budget":"$50k–$150k","timeline":"Ready now","status":"Qualified","priority":"high","reasons":["Ready now","High budget"]},
+  {"name":"David Chen","suburb":"Coburg","service":"Extension","budget":"$20k–$50k","timeline":"Within 1 month","status":"Contacted","priority":"medium","reasons":["Within 1 month","Medium budget"]},
+  {"name":"Priya Nair","suburb":"Sunshine","service":"Consultation","budget":"Under $20k","timeline":"Just exploring","status":"New","priority":"low","reasons":["Just exploring","Low budget"]},
+  {"name":"Tom Reynolds","suburb":"St Kilda","service":"New Build","budget":"$150k+","timeline":"Ready now","status":"Won","priority":"high","reasons":["Ready now","High budget"]},
+  {"name":"Emily Brooks","suburb":"Richmond","service":"Renovation","budget":"Under $20k","timeline":"Within 3 months","status":"Lost","priority":"low","reasons":["Within 3 months","Low budget"]}
 ]

@@ -36,9 +36,9 @@ td{padding:.6rem .7rem;border-bottom:1px solid #e2e8f0;background:#fff}
 </style>
 </head>
 <body>
-<header><h1>Small Business Enquiry Manager</h1><div class="tagline">Portfolio demo · Fictional data · No real clients</div></header>
+<header><h1>Small Business Enquiry Manager</h1><div class="tagline">Lead qualification and enquiry pipeline demo</div></header>
 <div class="container">
-<div class="note"><strong>Fictional portfolio/demo.</strong> Not built for any real client. Uses fictional Australian sample data; no real customer information, logos, or secrets.</div>
+<div class="note"><strong>Portfolio demonstration using fictional Australian sample data. No real customer information.</div>
 <div class="grid grid-2">
 <div class="card"><h2>New Enquiry</h2>
 <form id="enquiryForm" onsubmit="submitEnquiry(event)">
@@ -68,11 +68,11 @@ td{padding:.6rem .7rem;border-bottom:1px solid #e2e8f0;background:#fff}
 </div>
 <script>
 const sampleData=[
-{"name":"Sarah Whitmore","email":"sarah.w@example.com","phone":"0411 223 344","suburb":"Fitzroy","service":"Renovation","budget":"$50k–$150k","timeline":"Ready now","notes":"Kitchen + bathroom overhaul, heritage overlay.","status":"Qualified","priority":"high","reasons":["Ready now","High budget","Specific scope"]},
-{"name":"David Chen","email":"david.c@example.com","phone":"0433 998 112","suburb":"Coburg","service":"Extension","budget":"$20k–$50k","timeline":"Within 1 month","notes":"Single-storey rear extension for growing family.","status":"Contacted","priority":"medium","reasons":["Within 1 month","Medium budget","Clear scope"]},
-{"name":"Priya Nair","email":"priya.n@example.com","phone":"0400 771 229","suburb":"Sunshine","service":"Consultation","budget":"Under $20k","timeline":"Just exploring","notes":"Early-stage planning; wants cost estimates.","status":"New","priority":"low","reasons":["Just exploring","Low budget","No fixed timeline"]},
-{"name":"Tom Reynolds","email":"tom.r@example.com","phone":"0412 777 001","suburb":"St Kilda","service":"New Build","budget":"$150k+","timeline":"Ready now","notes":"Small-lot townhouse development. Developer referral.","status":"Won","priority":"high","reasons":["Ready now","High budget","Clear scope","Developer referral"]},
-{"name":"Emily Brooks","email":"emily.b@example.com","phone":"0415 612 345","suburb":"Richmond","service":"Renovation","budget":"Under $20k","timeline":"Within 3 months","notes":"Cosmetic refresh only; no structural work.","status":"Lost","priority":"low","reasons":["Low budget","Cosmetic only","Within 3 months (delayed)"]}
+{"name":"Sarah Whitmore","email":"sarah.w@example.com","phone":"0411 223 344","suburb":"Fitzroy","service":"Renovation","budget":"$50k–$150k","timeline":"Ready now","notes":"Kitchen + bathroom overhaul, heritage overlay.","status":"Qualified","priority":"high","reasons":["Ready now","High budget"]},
+{"name":"David Chen","email":"david.c@example.com","phone":"0433 998 112","suburb":"Coburg","service":"Extension","budget":"$20k–$50k","timeline":"Within 1 month","notes":"Single-storey rear extension for growing family.","status":"Contacted","priority":"medium","reasons":["Within 1 month","Medium budget"]},
+{"name":"Priya Nair","email":"priya.n@example.com","phone":"0400 771 229","suburb":"Sunshine","service":"Consultation","budget":"Under $20k","timeline":"Just exploring","notes":"Early-stage planning; wants cost estimates.","status":"New","priority":"low","reasons":["Just exploring","Low budget"]},
+{"name":"Tom Reynolds","email":"tom.r@example.com","phone":"0412 777 001","suburb":"St Kilda","service":"New Build","budget":"$150k+","timeline":"Ready now","notes":"Small-lot townhouse development. Developer referral.","status":"Won","priority":"high","reasons":["Ready now","High budget"]},
+{"name":"Emily Brooks","email":"emily.b@example.com","phone":"0415 612 345","suburb":"Richmond","service":"Renovation","budget":"Under $20k","timeline":"Within 3 months","notes":"Cosmetic refresh only; no structural work.","status":"Lost","priority":"low","reasons":["Within 3 months","Low budget"]}
 ];
 function scoreLead({service,budget,timeline,notes}){
   const budgetScores={

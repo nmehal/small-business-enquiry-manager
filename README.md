@@ -37,11 +37,13 @@ Priority thresholds:
 Free-text notes do not affect scoring.
 
 
-## Setup / Run
+## Setup / Run (local)
 ```bash
 cd /project
+# Start a local static server
 python -m http.server 8000
-# Open http://localhost:8000/index.html
+# Then open http://localhost:8000/index.html in a browser
+# Run Python scoring tests
 python tests/test_scoring.py
 ```
 
